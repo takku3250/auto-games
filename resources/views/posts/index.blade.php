@@ -8,18 +8,19 @@
     </head>
     <body class="antialiased">
         <h1>Game mathing</h1>
-        <h1>募集投稿</h1>
+        <a href="/posts/create">友達を探す</a>
         <div class='posts'>
              @foreach ($posts as $post)
             <div class='post'>
-                <h2 class='title'>
-            <a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
+                <h2 class='title'>  
+                <a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
                 </h2>
-                <p class='body'>{{ $post->body }}</p>
+                <p class='body'>{{  $post->body  }}</p>
             </div>
              @endforeach
         </div>
-        <div class='Paginate'>{{ $posts->links() }}
+        <div class='paginate'>
+            {{ $posts->links() }}
         </div>
     </body>
 </html>

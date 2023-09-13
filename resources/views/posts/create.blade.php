@@ -4,6 +4,10 @@
         <meta charset="utf-8">
         <title>ゲームマッチングアプリ</title>
          </head>
+         <x-app-layout>
+    <x-slot name="header">
+        create
+    </x-slot>
     <body>
         <h1>募集投稿</h1>
         <form action="/posts" method="POST">
@@ -36,4 +40,5 @@
     </div>
   
     </body>
+  </x-app-layout>
 </html>

@@ -4,6 +4,10 @@
         <meta charset="utf-8">
         <title>ゲームマッチングアプリ</title>
          </head>
+ <x-app-layout>
+    <x-slot name="header">
+      edit
+    </x-slot>
     <body>
         <h1 class="title">募集投稿 編集画面</h1>
         <form action="/posts/{{ $post->id}}" method="POST">
@@ -26,4 +30,5 @@
             <a href="/">戻る</a>
         </div>
     </body>
+ </x-app-layout>
 </html>

@@ -6,6 +6,10 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
+  <x-app-layout>
+    <x-slot name="header">
+        index
+    </x-slot>
     <body class="antialiased">
         <h1>Game mathing</h1>
         <a href="/posts/create">友達を探す</a>
@@ -40,4 +44,5 @@
 　　　　</script>
 　　　　
     </body>
+  </x-app-layout>
 </html>

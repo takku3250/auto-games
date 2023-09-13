@@ -6,6 +6,10 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
     </head>
+ <x-app-layout>
+    <x-slot name="header">
+        index
+    </x-slot>
     <body class="antialiased">
         <h1>Game mathing</h1>
         <a href="/posts/create">友達を探す</a>
@@ -16,6 +20,7 @@
                 <a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
                 </h2>
                 <p class='body'>{{  $post->body  }}</p>
+                <p class="user_namme">  {{ Auth::user()->name }}</p>
              <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
               @csrf
               @method('DELETE')
@@ -23,12 +28,11 @@
 　　　　　　　</form>
             </div>
             <a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a>
-             @endforeach
         </div>
         <div class='paginate'>
             {{ $posts->links() }}
         </div>
-      
+     @endforeach
     　　<script>
     　　function deletePost(id) {
         　　'use strict'
@@ -38,6 +42,6 @@
         　　　}
    　　 }
 　　　　</script>
-　　　　
     </body>
+  </x-app-layout>
 </html>

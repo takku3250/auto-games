@@ -18,7 +18,9 @@ use App\Http\Controllers\CategoryController;
 Route::get('/', function () {
     return view('welcome');
 });
-
+Route::get('chat', function(){
+ return view('chat');
+});
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -43,3 +45,6 @@ Route::controller(PostController::class)->middleware(['auth'])->group(function()
 });
 
 require __DIR__.'/auth.php';
+Route::get('/chat', [App\Http\Controllers\ChatController::class, 'index']);
+Route::post('/chat', [App\Http\Controllers\ChatController::class, 'sendMessage']);
+

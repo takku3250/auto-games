@@ -18,4 +18,10 @@ class AppServiceProvider extends ServiceProvider
        Paginator::useBootstrap(); 
        \URL::forceScheme('https'); 
     }
+    public function register()
+{
+    $this->app->singleton(MatchingService::class, function ($app) {
+        return new MatchingService(/* コンストラクタに必要な引数を追加 */);
+    });
+}
 }

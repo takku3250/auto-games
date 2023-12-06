@@ -12,7 +12,7 @@
     </x-slot>
     <body class="antialiased">
         <h1>Game mathing</h1>
-        <a href="/posts/create">友達を探す</a>
+        <a href="/posts/create">ゲーム募集を作る</a>
         <div class='posts'>
              @foreach ($posts as $post)
             <div class='post'>
@@ -20,19 +20,30 @@
                 <a href="/posts/{{ $post->id }}">{{ $post->title }}</a>
                 </h2>
                 <p class='body'>{{  $post->body  }}</p>
-                <p class="user_namme">  {{ Auth::user()->name }}</p>
+                <small>{{ $post->user->name }}</small>
              <form action="/posts/{{ $post->id }}" id="form_{{ $post->id }}" method="post">
               @csrf
               @method('DELETE')
-              <button type="button" onclick="deletePost({{ $post->id }})">やめる</button> 
+              <button type="button" onclick="deletePost({{ $post->id }})"></button> 
 　　　　　　　</form>
             </div>
             <a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a>
         </div>
-        <div class='paginate'>
+        @if($post->user->id == Auth::id())
+        <a href = "/matching/list">自分の募集です。（募集一覧へ）</a>
+        @else
+        <form action ="{{route('matches.store')}}" method = "post">
+            @csrf
+            <input type="hidden" name = "owner_id" value = "{{$post ->user->id}}">
+            <input type="hidden" name = "post_id" value = "{{$post->id}}">
+            
+            <input type="submit" value="募集に参加する">
+            </form>
+        @endif
+     @endforeach
+      <div class='paginate'>
             {{ $posts->links() }}
         </div>
-     @endforeach
     　　<script>
     　　function deletePost(id) {
         　　'use strict'
@@ -42,6 +53,6 @@
         　　　}
    　　 }
 　　　　</script>
-    </body>
+　　　</body>
   </x-app-layout>
 </html>

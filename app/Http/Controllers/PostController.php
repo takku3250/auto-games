@@ -23,19 +23,34 @@ public function show(Post $post)
 public function store(PostRequest $request, Post $post)
 {
     $input = $request['post'];
+    $input += ['user_id' => $request->user()->id];    //この行を追加
     $post->fill($input)->save();
     return redirect('/posts/' . $post->id);
+    
+    // データを保存
+    $game = new Game();
+    $game->title = $request->input('title');
+    $game->genre = $request->input('genre');
+    $game->platforms = $request->input('platforms');
+    $game->mode = $request->input('mode');
+    $game->playstyle = $request->input('playstyle');
+    $game->rank = $request->input('rank');
+    $game->image_url = $request->input('image_url');
+    $game->body = $request->input('body');
+    $game->voice_chat = $request->has('voice_chat');
+    $game->save();
+
 }
 public function edit(Post $post)
 {
     return view('posts.edit')->with(['post' => $post]);
 }
 
-public function update(Request $request, Post $post)
+public function update(PostRequest $request, Post $post)
 {
     $input_post = $request['post'];
+    $input_post += ['user_id' => $request->user()->id];   //この行を追加
     $post->fill($input_post)->save();
-
     return redirect('/posts/' . $post->id);
 }
 

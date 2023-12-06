@@ -15,8 +15,17 @@ return new class extends Migration
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
-         $table->string('title', 50);
+            $table->string('title', 50);
             $table->string('body', 200);
+            $table->boolean('is_matching')->default(0);
+            $table->string('game_title')->nullable();
+            $table->string('game_genre')->nullable();
+            $table->string('game_platforms')->nullable();
+            $table->string('game_mode')->nullable();
+            $table->string('game_playstyle')->nullable();
+            $table->string('game_rank')->nullable();
+            $table->boolean('game_voice_chat')->nullable();
+            $table->foreignId("user_id");
             $table->timestamps();
         });
     }

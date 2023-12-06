@@ -12,29 +12,36 @@ use Illuminate\Queue\SerializesModels;
 
 use App\Library\Message;
 
-class MessageSent implements ShouldBroadcast
+class SendMessage implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
   // ※イベントをブロードキャストすると、publicメンバーが送信される。
-    public $message;
+  public $chat;
 
-    /**
-     * Create a new event instance.
-     *
-     * @return void
-     */
-    public function __construct(Message $message)
+    public function __construct($chat)
     {
-        $this->message=$message;
+        $this->chat = $chat;
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
-     */
     public function broadcastOn()
     {
-        return new PrivateChannel('chat');
+        return new Channel('chat.' . $this->chat->to_user_id);
+    }
+    /**
+     *追加
+     */
+    public function broadcastWith()
+    {
+        return [
+            'message' => $this->chat->message,
+            'created_at' => $this->chat->created_at,
+        ];
+    }
+    /**
+     * イベントブロードキャスト名
+     */
+    public function broadcastAs()
+    {
+        return 'chat_event';
     }
 }

@@ -25,7 +25,7 @@ return new class extends Migration
             $table->string('game_playstyle')->nullable();
             $table->string('game_rank')->nullable();
             $table->boolean('game_voice_chat')->nullable();
-            $table->foreignId("user_id");
+            $table->foreignId("user_id")->default(1);
             $table->timestamps();
         });
     }

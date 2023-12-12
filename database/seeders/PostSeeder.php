@@ -18,6 +18,8 @@ class PostSeeder extends Seeder
     public function run()
     {
         DB::table('posts')->insert([
+                'user_id' => 1,
+                'category_id' => 1, 
                 'title' => '募集作成',
                 'body' => 'ランクorカジュアル',
                 'created_at' => new DateTime(),

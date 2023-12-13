@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Http\Requests\PostRequest;
 use App\Models\Category;
+use App\Models\game;
 
 class PostController extends Controller
 {
@@ -25,9 +26,9 @@ public function store(PostRequest $request, Post $post)
     $input = $request['post'];
     $input += ['user_id' => $request->user()->id];    //この行を追加
     $post->fill($input)->save();
+     // データを保存
+   
     return redirect('/posts/' . $post->id);
-    
-    // データを保存
     $game = new Game();
     $game->title = $request->input('title');
     $game->genre = $request->input('genre');

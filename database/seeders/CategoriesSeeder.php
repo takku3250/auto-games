@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use DateTime;
-class Categories extends Seeder
+class CategoriesSeeder extends Seeder
 {
     /**
      * Run the database seeds.

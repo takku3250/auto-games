@@ -21,6 +21,20 @@
                      <x-nav-link :href="route('games.index')" :active="request()->routeIs('games.index')">
                        {{ __('最近のゲーム募集') }}
                      </x-nav-link>
+  @auth
+    <!-- ログインしている場合のメニュー -->
+    <x-nav-link :href="route('logout')" :active="request()->routeIs('logout')">
+        <span onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            {{ __('ログアウト') }}
+        </span>
+    </x-nav-link>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
+@else
+    <!-- ログインしていない場合のメニュー -->
+    <a href="{{ route('login') }}">{{ __('ログイン') }}</a>
+@endauth
                      
                 </div>
             </div>
